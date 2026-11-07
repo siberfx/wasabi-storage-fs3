@@ -2,6 +2,12 @@
 
 All notable changes to `siberfx/flysystem-wasabi` are documented in this file.
 
+## 0.1.1 - 2026-11-07
+
+- Added `examples/` with a shared Laravel controller and routes, plus Blade, Twig (TwigBridge), Vue 3 and React frontends for form uploads, presigned direct uploads with progress, listing, downloading and deleting.
+- README: badges now read the PHP, Laravel and Flysystem versions from Packagist; added a "Frontend examples" section.
+- `examples/` is excluded from Composer dist archives.
+
 ## 0.1.0 - 2026-11-07
 
 - Requires PHP ^8.3 and Laravel 12 or 13.

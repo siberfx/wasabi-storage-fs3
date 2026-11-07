@@ -1,13 +1,13 @@
 # Flysystem Wasabi
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/siberfx/flysystem-wasabi.svg?style=flat-square)](https://packagist.org/packages/siberfx/flysystem-wasabi)
-[![Tests](https://img.shields.io/github/actions/workflow/status/siberfx/flysystem-wasabi/tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/siberfx/flysystem-wasabi/actions/workflows/tests.yml)
-[![Total Downloads](https://img.shields.io/packagist/dt/siberfx/flysystem-wasabi.svg?style=flat-square)](https://packagist.org/packages/siberfx/flysystem-wasabi)
-[![PHP Version](https://img.shields.io/packagist/dependency-v/siberfx/flysystem-wasabi/php?style=flat-square)](https://packagist.org/packages/siberfx/flysystem-wasabi)
-[![Laravel](https://img.shields.io/badge/laravel-12.x%20%7C%2013.x-FF2D20?style=flat-square&logo=laravel&logoColor=white)](https://laravel.com)
-[![Flysystem](https://img.shields.io/badge/flysystem-v3-4F5B93?style=flat-square)](https://flysystem.thephpleague.com)
-[![Tested with Pest](https://img.shields.io/badge/tested%20with-pest-F472B6?style=flat-square)](https://pestphp.com)
-[![License](https://img.shields.io/packagist/l/siberfx/flysystem-wasabi.svg?style=flat-square)](LICENSE.md)
+[![Packagist Version](https://img.shields.io/packagist/v/siberfx/flysystem-wasabi?style=flat-square&logo=packagist&logoColor=white&label=version)](https://packagist.org/packages/siberfx/flysystem-wasabi)
+[![Tests](https://img.shields.io/github/actions/workflow/status/siberfx/flysystem-wasabi/tests.yml?branch=main&style=flat-square&logo=github&label=tests)](https://github.com/siberfx/flysystem-wasabi/actions/workflows/tests.yml)
+[![Total Downloads](https://img.shields.io/packagist/dt/siberfx/flysystem-wasabi?style=flat-square&label=downloads)](https://packagist.org/packages/siberfx/flysystem-wasabi/stats)
+[![PHP](https://img.shields.io/packagist/dependency-v/siberfx/flysystem-wasabi/php?style=flat-square&logo=php&logoColor=white&label=php&color=777BB4)](https://packagist.org/packages/siberfx/flysystem-wasabi)
+[![Laravel](https://img.shields.io/packagist/dependency-v/siberfx/flysystem-wasabi/illuminate%2Fsupport?style=flat-square&logo=laravel&logoColor=white&label=laravel&color=FF2D20)](https://laravel.com)
+[![Flysystem](https://img.shields.io/packagist/dependency-v/siberfx/flysystem-wasabi/league%2Fflysystem?style=flat-square&label=flysystem&color=4F5B93)](https://flysystem.thephpleague.com)
+[![Pest](https://img.shields.io/badge/tested_with-pest-F472B6?style=flat-square)](https://pestphp.com)
+[![License](https://img.shields.io/packagist/l/siberfx/flysystem-wasabi?style=flat-square&label=license)](LICENSE.md)
 
 A [Wasabi Hot Cloud Storage](https://wasabi.com/) filesystem driver for Laravel 12 and 13.
 
@@ -22,6 +22,7 @@ the package works out the Wasabi endpoint.
 - [Wasabi account setup: policies & permissions](#wasabi-account-setup-policies--permissions)
 - [Verifying your setup](#verifying-your-setup-php-artisan-wasabicheck)
 - [Usage](#usage)
+- [Frontend examples (Blade, Twig, Vue, React)](#frontend-examples)
 - [Troubleshooting](#troubleshooting)
 - [Testing](#testing)
 
@@ -462,6 +463,23 @@ $this->post('/avatar', ['avatar' => UploadedFile::fake()->image('me.jpg')]);
 
 Storage::disk('wasabi')->assertExists('avatars/me.jpg');
 ```
+
+## Frontend examples
+
+The [`examples/`](examples) folder has complete, copy-paste implementations. All of them share one controller and keep
+files private, showing them through `temporaryUrl()` links:
+
+| Example | Files | Shows |
+|---------|-------|-------|
+| **Laravel backend** | [`examples/laravel/WasabiFileController.php`](examples/laravel/WasabiFileController.php), [`routes.php`](examples/laravel/routes.php) | Form upload, presigned direct upload (presign + confirm), list, download, delete, per-user key prefix |
+| **Blade** | [`examples/blade/index.blade.php`](examples/blade/index.blade.php) | Upload form, direct upload with progress, file list with image previews |
+| **Twig** | [`examples/twig/index.twig`](examples/twig/index.twig) | Same page for Laravel + [TwigBridge](https://github.com/rcrowe/TwigBridge) |
+| **Vue 3** | [`examples/vue/WasabiUploader.vue`](examples/vue/WasabiUploader.vue) | Drag & drop, parallel uploads with progress, file list, delete |
+| **React** | [`examples/react/WasabiUploader.jsx`](examples/react/WasabiUploader.jsx) | Same component for React 18/19 |
+| **JS helper** | [`examples/js/wasabiUpload.js`](examples/js/wasabiUpload.js) | Dependency-free `uploadToWasabi(file, { onProgress })` used by Vue and React |
+
+See [`examples/README.md`](examples/README.md) for the upload flow diagram and setup notes. Direct browser uploads need
+the bucket [CORS rule](#5-cors-browser-uploads-and-fetches).
 
 ## Troubleshooting
 
